@@ -1,4 +1,4 @@
-﻿namespace ChessParser {
+﻿namespace ChessParserFen {
 
     public static class funcs {
         public static string returnField(string s, int x) { // return one field of the fen string
@@ -7,7 +7,7 @@
         }
     }
     public static class parses {
-        static char[,] fenPositions(string fenString) { // fill board with nothing but positions of pieces
+        static char[,] positions(string fenString) { // fill board with nothing but positions of pieces
             char[,] board = new char[8,8];
 
             string piecePositions = funcs.returnField(fenString, 0);
@@ -34,7 +34,7 @@
             return 'b'; // not sure if you can implicitely typecast string to char  
         }
 
-        static string[] castlingRights(string fenS) {
+        static string[] castlingRights(string fenS) { // return an array of valid castles
             string field = funcs.returnField(fenS, 2);
             if(field == "-") return new string[0];
 
@@ -51,6 +51,21 @@
             }
 
             return ans;
+        }
+
+        static string enPassantTargets(string fenS) {
+            string field = funcs.returnField(fenS, 3);
+            return field;
+        }
+
+        static int halfMoveCount(string fenS) { // number of moves that arent a capture or pawn move, used to enforce 50 move draw
+            string field = funcs.returnField(fenS, 4); 
+            return int.Parse(field);
+        }
+
+        static int fullMoveCount(string fenS) { // number of full moves
+            string field = funcs.returnField(fenS, 5);
+            return int.Parse(field);
         }
     }
 }

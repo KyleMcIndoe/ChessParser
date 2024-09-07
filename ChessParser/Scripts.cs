@@ -27,5 +27,30 @@
 
             return board;
         }
+
+        static char nextToMove(string fenS) {
+            string field = funcs.returnField(fenS, 1);
+            if(field == "w") return 'w';
+            return 'b'; // not sure if you can implicitely typecast string to char  
+        }
+
+        static string[] castlingRights(string fenS) {
+            string field = funcs.returnField(fenS, 2);
+            if(field == "-") return new string[0];
+
+            string[] ans = new string[field.Length];
+            char[] fieldChars = field.ToCharArray(0, field.Length);
+
+            for(int i = 0; i < field.Length; i++) {
+                char curChar = fieldChars[i];
+
+                if(curChar == 'K') ans[i] = "WhiteKingside";
+                if(curChar == 'Q') ans[i] = "WhiteQueenside";
+                if(curChar == 'k') ans[i] = "BlackKingside";
+                if(curChar == 'q') ans[i] = "BlackQueenside";
+            }
+
+            return ans;
+        }
     }
 }

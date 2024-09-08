@@ -1,5 +1,7 @@
 # ChessParser
 
+**This is what I chose to do instead of being productive on other projects**
+
 Project built to take fen strings and other notation, and translate them into a readable chess board.
 
 project has a class called "board", with a constructor input for a fen string

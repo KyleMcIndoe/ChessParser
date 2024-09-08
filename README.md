@@ -2,7 +2,7 @@
 
 Project built to take fen strings and other notation, and translate them into a readable chess board.
 
-Though this may change later, parses return a 2d array of chars.
+project has a class called "board", with a constructor input for a fen string
 
 char array follows fen notation piece representation
 - Lower case char represents a black piece

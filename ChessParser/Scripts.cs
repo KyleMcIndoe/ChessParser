@@ -1,5 +1,8 @@
-﻿namespace ChessParserFen {
+﻿namespace ChessParser {
 
+    public static class fenStrings {
+        public static string gameStart = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    }
     public static class funcs {
         public static string returnField(string s, int x) { // return one field of the fen string
             string[] fields = s.Split(" ");
@@ -7,7 +10,7 @@
         }
     }
     public static class parses {
-        static char[,] positions(string fenString) { // fill board with nothing but positions of pieces
+        public static char[,] positions(string fenString) { // fill board with nothing but positions of pieces
             char[,] board = new char[8,8];
 
             string piecePositions = funcs.returnField(fenString, 0);
@@ -28,13 +31,13 @@
             return board;
         }
 
-        static char nextToMove(string fenS) {
+        public static char nextToMove(string fenS) {
             string field = funcs.returnField(fenS, 1);
             if(field == "w") return 'w';
             return 'b'; // not sure if you can implicitely typecast string to char  
         }
 
-        static string[] castlingRights(string fenS) { // return an array of valid castles
+        public static string[] castlingRights(string fenS) { // return an array of valid castles
             string field = funcs.returnField(fenS, 2);
             if(field == "-") return new string[0];
 
@@ -53,17 +56,17 @@
             return ans;
         }
 
-        static string enPassantTargets(string fenS) {
+        public static string enPassantTargets(string fenS) {
             string field = funcs.returnField(fenS, 3);
             return field;
         }
 
-        static int halfMoveCount(string fenS) { // number of moves that arent a capture or pawn move, used to enforce 50 move draw
+        public static int halfMoveCount(string fenS) { // number of moves that arent a capture or pawn move, used to enforce 50 move draw
             string field = funcs.returnField(fenS, 4); 
             return int.Parse(field);
         }
 
-        static int fullMoveCount(string fenS) { // number of full moves
+        public static int fullMoveCount(string fenS) { // number of full moves
             string field = funcs.returnField(fenS, 5);
             return int.Parse(field);
         }
